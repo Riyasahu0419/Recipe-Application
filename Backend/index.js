@@ -19,13 +19,13 @@ app.use("/recipes", recipeRoutes);
 
 app.use("/userRecipe", userRecipeRoutes);
 
-// app.use(
-//     cors({
-//       origin: "http://localhost:5173", // Allow frontend
-//       methods: ["GET", "POST", "PUT", "DELETE"], // Fix method format
-//       credentials: true,
-//     })
-//   );
+app.use(
+    cors({
+      origin: "https://recipe-application-delta.vercel.app/", // Allow frontend
+      methods: ["GET", "POST", "PUT", "DELETE"], // Fix method format
+      credentials: true,
+    })
+  );
 
 
   app.get("/", (req, res) => {
