@@ -23,7 +23,7 @@ const Signup = () => {
     }
   
     try {
-      const response = await fetch("http://localhost:8080/user/register", {
+      const response = await fetch("https://recipe-application-r41c.onrender.com/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password })
