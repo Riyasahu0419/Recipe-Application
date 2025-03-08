@@ -4,7 +4,7 @@ This full-stack application allows users to *discover, search, and save* their f
 
 Built with *React (frontend), Node.js/Express (backend), and MongoDB (database)*, this project demonstrates a comprehensive full-stack development approach.
 
-🔗 *Live Demo:* [View the Recipe App](#) <!-- Add your deployment link here -->
+🔗 *Live Demo:* [[View the Recipe App]](https://recipe-application-delta.vercel.app/)(#) <!-- Add your deployment link here -->
 
 ---
 
