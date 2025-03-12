@@ -24,6 +24,7 @@ app.use(
       origin: "https://recipe-application-delta.vercel.app/", // Allow frontend
       methods: ["GET", "POST", "PUT", "DELETE"], // Fix method format
       credentials: true,
+      allowedHeaders: ['Content-Type', 'Authorization']
     })
   );
 
