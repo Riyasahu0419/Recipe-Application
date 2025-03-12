@@ -25,7 +25,6 @@ const Signup = () => {
     try {
       const response = await fetch("https://recipe-application-r41c.onrender.com/user/register", {
         method: "POST",
-        mode: 'no-cors',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password })
       

@@ -34,17 +34,17 @@ route.post("/register", async (req, res) => {
         try {
           await user.save();
           console.log("User saved to database:", user);
-          res.status(201).json({
+          res.status(200).json({
             message: "You have been Successfully Registered!",
             user,
           });
-        } catch (saveError) {
+        } catch (error) {
           console.error("Error saving user:", saveError);
-          res.status(500).json({ error: "Error saving user" });
+          res.status(400).json({ error: error.message || 'Something went wrong' });
         }
       });
     } catch (err) {
-      console.error("Unexpected error:", err);
+      
       res.status(500).json({ error: "Internal Server Error" });
     }
   });
