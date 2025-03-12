@@ -25,17 +25,17 @@ const Signup = () => {
     try {
       const response = await fetch("https://recipe-application-r41c.onrender.com/user/register", {
         method: "POST",
-        mode: 'no-cors',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password })
-      
       });
-  
-      const data = await response.json();
+    
+     
       if (!response.ok) {
-        throw new Error(data.message || "Signup failed");
+        const errorData = await response.json(); 
+        throw new Error(errorData.message || "Signup failed");
       }
-  
+    
+      const data = await response.json(); 
       console.log("Signup successful", data);
       alert("User registration successful");
       navigate("/login");
@@ -43,7 +43,7 @@ const Signup = () => {
       setError(`An error occurred: ${err.message}`);
       console.log("Signup error:", err);
     }
-  };
+  }    
   
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
