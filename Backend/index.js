@@ -28,7 +28,8 @@ app.use(
     })
   );
 
-
+  app.options('*', cors());
+  
   app.get("/", (req, res) => {
     res.send("Recipe API is running...");
   });
