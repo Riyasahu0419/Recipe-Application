@@ -1,25 +1,52 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Clock, ChefHat, Search, Flame, Star, Users, BookOpen, ChevronDown } from 'lucide-react';
+import { Heart, Clock, ChefHat, Search } from 'lucide-react';
 
 const RecipeCard = ({ recipe, onClick }) => {
-    const [isLiked, setIsLiked] = useState(
-      JSON.parse(localStorage.getItem("likedRecipes"))?.some(r => r.id === recipe.id) || false
-    );
+  const [isLiked, setIsLiked] = useState(false);
   
-    const handleLike = (e) => {
-      e.stopPropagation();
+  // Load initial liked state from storage or database when component mounts
+  useEffect(() => {
+    const likedRecipes = JSON.parse(localStorage.getItem("likedRecipes")) || [];
+    setIsLiked(likedRecipes.some(r => r.id === recipe.id));
+  }, [recipe.id]);
+
+  const handleLike = async (e) => {
+    e.stopPropagation(); // Prevent the card click from firing
+    
+    try {
+      // Save to database
+      const response = await fetch('https://recipe-application-ao7q.onrender.com/saved/', {
+        method: isLiked ? 'DELETE' : 'POST', // DELETE if unliking, POST if liking
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(recipe),
+      });
+
+      if (!response.ok) throw new Error('Failed to update saved recipe');
+      
+      // If DB operation was successful, update local state
       const likedRecipes = JSON.parse(localStorage.getItem("likedRecipes")) || [];
-  
+      
       let updatedLikes;
       if (isLiked) {
         updatedLikes = likedRecipes.filter(r => r.id !== recipe.id);
       } else {
         updatedLikes = [...likedRecipes, recipe];
       }
-  
+      
+      // Update localStorage
       localStorage.setItem("likedRecipes", JSON.stringify(updatedLikes));
+      
+      // Update UI state
       setIsLiked(!isLiked);
-    };
+      
+      console.log(isLiked ? 'Recipe removed from favorites' : 'Recipe saved to favorites');
+    } catch (error) {
+      console.error('Error updating recipe:', error);
+    }
+  };
+  
   
     return (
       <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl relative cursor-pointer" onClick={() => onClick(recipe)}>
