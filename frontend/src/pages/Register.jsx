@@ -23,19 +23,18 @@ const Signup = () => {
     }
   
     try {
-      const response = await fetch("https://recipe-application-r41c.onrender.com/user/register", {
+      const response = await fetch("https://recipe-application-ao7q.onrender.com/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, email, password })
+      
       });
-    
-     
+  
+      const data = await response.json();
       if (!response.ok) {
-        const errorData = await response.json(); 
-        throw new Error(errorData.message || "Signup failed");
+        throw new Error(data.message || "Signup failed");
       }
-    
-      const data = await response.json(); 
+  
       console.log("Signup successful", data);
       alert("User registration successful");
       navigate("/login");
@@ -43,14 +42,14 @@ const Signup = () => {
       setError(`An error occurred: ${err.message}`);
       console.log("Signup error:", err);
     }
-  }    
+  };
   
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
         <div className="flex justify-center text-3xl mb-4">💬</div>
         <h2 className="text-2xl font-semibold text-center">Create an account</h2>
-        <p className="text-gray-500 text-center mb-4">Join our community today!</p>
+        <p className="text-gray-500 text-center mb-4">Discover and share delicious recipes!</p>
 
         {error && <p className="text-red-500 text-sm text-center mb-3">{error}</p>}
 
