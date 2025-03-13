@@ -16,6 +16,7 @@ app.use((req, res, next) => {
 // CORS configuration
 app.use(cors({
   origin: (origin, callback) => {
+    console.log('Request from origin:', origin); // Log incoming origin
     const allowedOrigins = [
       "http://localhost:5173", // Local development
       "https://recipe-application-delta.vercel.app/", // Production frontend
@@ -23,6 +24,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
+      console.error(`Origin ${origin} not allowed by CORS`);
       callback(new Error("Not allowed by CORS"));
     }
   },
