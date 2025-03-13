@@ -16,7 +16,7 @@ const RecipeCard = ({ recipe, onClick }) => {
     try {
       // Save to database
       const response = await fetch('https://recipe-application-ao7q.onrender.com/saved/', {
-        method: isLiked ? 'DELETE' : 'POST', // DELETE if unliking, POST if liking
+        method: isLiked ? 'DELETE' : 'POST', 
         headers: {
           'Content-Type': 'application/json',
         },
