@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
       params: {
         apiKey: SPOONACULAR_API_KEY,
         query,
-        number: 100, // Fetch 10 recipes
+        number: 1000, // Fetch 10 recipes
       },
     });
 

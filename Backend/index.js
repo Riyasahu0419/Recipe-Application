@@ -4,6 +4,7 @@ const connection = require("./config/db")
 const user=require("./routes/UserRoute")
 const recipeRoutes = require("./routes/recipes");
 const userRecipeRoutes = require("./routes/userRecipes");
+const savedRecipe=require("./routes/saved")
 const app=express()
 const cors = require("cors");
 
@@ -42,15 +43,10 @@ app.use(express.urlencoded({ extended: false }));
 
 
 
-
-
-
-
-
-
 app.use("/user",user)
 app.use("/recipes", recipeRoutes);
 app.use("/userRecipe", userRecipeRoutes);
+app.use("/saved",savedRecipe)
 
 
  
